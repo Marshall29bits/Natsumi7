@@ -153,13 +153,12 @@
       <div class="torch right" aria-hidden="true"></div>
 
       <h1 id="t" class="title">Natsumiii7</h1>
-      <p id="d" class="subtitle">¡Te invito a <strong>jugar Minecraft Natsumii</strong> conmigo Déjame tu correo  🧱⛏️</p>
+      <p id="d" class="subtitle">¡Te invito a <strong>jugar Minecraft</strong> conmigo Natsumi! Déjame tu correo y te lo compro  🧱⛏️</p>
 
       <form id="inviteForm" novalidate>
         <label for="email">Tu correo</label>
         <input id="email" name="email" type="email" inputmode="email" placeholder="natsumi@example.com" autocomplete="email" required aria-required="true" />
-        <button type="submit" aria-label="Enviar invitación">¡Listo!</button>
-        
+        <button type="submit" aria-label="Enviar invitación">Listo</button>
       </form>
     </section>
   </main>
@@ -179,15 +178,15 @@
       const email = input.value.trim();
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         input.focus();
-        input.setCustomValidity('Ingresa un correo válido Natsumi ._. .');
+        input.setCustomValidity('Ingresa un correo válido Natsumi ._.    .');
         input.reportValidity();
         return;
       }
       input.setCustomValidity('');
 
-      const subject = encodeURIComponent('Vamos a jugar Minecraft jaja');
+      const subject = encodeURIComponent('Juega conmigo Natsumi jaja');
       const body = encodeURIComponent(
-        `Hola Natsumi!\n\nMi correo es: ${email}\nQuiero unirme a la partida de Minecraft.\n\n¿Me compartes el IP/Realm y la hora?\n\n— Enviado desde Natsumiii7`
+        `Hola Marcos!\n\nMi correo es: ${email}\nSi quier jugar Minecraft.\n\n T.T \n\n— Enviado desde Natsumiii7`
       );
 
       // Abre el cliente de correo del usuario para enviar el mensaje
