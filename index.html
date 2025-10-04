@@ -96,7 +96,8 @@
 
     .btns{
       position:relative; margin:1.4rem auto 0; width:min(560px,86vw);
-      height:140px; display:grid; place-items:center;
+      height:clamp(180px, 34vh, 320px); display:grid; place-items:center;
+      touch-action: none; /* mejora respuesta en táctiles */
     }
 
     .row{ display:flex; gap:12px; align-items:center; justify-content:center; }
@@ -106,15 +107,13 @@
       padding:14px 18px; border:0; border-radius:14px; cursor:pointer;
       background:linear-gradient(#00d3bd,#00bfa6); color:#083b34;
       box-shadow: 0 4px 0 #00695c, 0 12px 24px #00bfa640; transition: transform .06s ease, filter .2s, left .15s, top .15s, transform .15s;
-      text-transform:uppercase; letter-spacing:.5px;
-      user-select:none;
+      text-transform:uppercase; letter-spacing:.5px; user-select:none; touch-action: manipulation;
     }
     button:hover{filter:brightness(1.05)}
     button:active{transform:translateY(2px); box-shadow:0 2px 0 #00695c}
 
-    #btnNo{
-      position:absolute; left:12px; top:12px; transform:translate(0,0);
-    }
+    #btnNo{ position:absolute; left:12px; top:12px; transform:translate(0,0); }
+    #btnNo:focus{ outline:none }
 
     #msg{ margin-top:1rem; font-weight:700; }
 
@@ -147,7 +146,7 @@
   <div class="ground" aria-hidden="true"></div>
 
   <footer>
-    Hecho con ❤ para Natsumi • <a href="https://github.com/" target="_blank" rel="noopener"></a>
+    Hecho con ❤❤❤❤❤❤❤ para Natsumi • <a href="https://github.com/" target="_blank" rel="noopener"></a>
   </footer>
 
   <script>
@@ -156,26 +155,47 @@
     const zone = document.getElementById('btnZone');
     const msg = document.getElementById('msg');
 
+    function rand(min, max){ return Math.random() * (max - min) + min; }
+
     function moveNo() {
       const r = zone.getBoundingClientRect();
       const b = btnNo.getBoundingClientRect();
       const maxX = Math.max(0, r.width - b.width - 8);
       const maxY = Math.max(0, r.height - b.height - 8);
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
+      const x = rand(0, maxX);
+      const y = rand(0, maxY);
       btnNo.style.transform = `translate(${x}px, ${y}px)`;
     }
 
-    // Evitar que den clic en "No" (desktop y mobile)
-    ['pointerenter','pointerover','pointerdown','touchstart','focus'].forEach(evt => {
-      btnNo.addEventListener(evt, (e)=>{
-        e.preventDefault();
-        moveNo();
-      }, { passive: false });
-    });
+    function getPoint(e){
+      if (e.touches && e.touches[0]) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      if (e.changedTouches && e.changedTouches[0]) return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+      return { x: e.clientX, y: e.clientY };
+    }
 
-    // Por si alguien logra presionar Enter con foco en No (accesibilidad)
-    btnNo.addEventListener('click', (e)=>{ e.preventDefault(); moveNo(); });
+    // Si el puntero (o dedo) se acerca al botón No, ¡huye!
+    function handleProximity(e){
+      const p = getPoint(e);
+      const b = btnNo.getBoundingClientRect();
+      const cx = b.left + b.width/2;
+      const cy = b.top + b.height/2;
+      const dist = Math.hypot(cx - p.x, cy - p.y);
+      const threshold = Math.max(90, Math.max(b.width, b.height) * 1.8); // mayor umbral para táctiles
+      if (dist < threshold) {
+        moveNo();
+        if (e.cancelable) e.preventDefault();
+      }
+    }
+
+    // Evitar que den clic en "No" (desktop y táctil)
+    ['pointerenter','pointerover','pointerdown','touchstart','focus'].forEach(evt => {
+      btnNo.addEventListener(evt, (e)=>{ if (e.cancelable) e.preventDefault(); moveNo(); }, { passive: false });
+    });
+    btnNo.addEventListener('click', (e)=>{ if (e.cancelable) e.preventDefault(); moveNo(); });
+
+    // Moverse cuando el dedo/mano se acerca
+    zone.addEventListener('pointermove', handleProximity, { passive: false });
+    zone.addEventListener('touchmove', handleProximity, { passive: false });
 
     // Al decir Sí
     btnSi.addEventListener('click', ()=>{
@@ -183,7 +203,8 @@
       msg.textContent = '¡Entonces envíame una screenshot de esta página para ver, jaja!';
     });
 
-    // Primera reubicación para que ya empiece travieso
+    // Recalcular en resize y primera reubicación
+    window.addEventListener('resize', moveNo);
     moveNo();
   </script>
 </body>
