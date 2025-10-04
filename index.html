@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Natsumiii7 — ¡Te invito a jugar Minecraft!</title>
-  <meta name="description" content="Invitación especial para jugar Minecraft — deja tu correo y coordinamos la partida." />
-  <meta property="og:title" content="Natsumiii7 — ¡Te invito a jugar Minecraft!" />
-  <meta property="og:description" content="Deja tu correo y coordinamos la partida." />
+  <title>Natsumiii7 — ¿Aceptas jugar Minecraft?</title>
+  <meta name="description" content="Invitación interactiva para jugar Minecraft. ¿Aceptas, Natsumi?" />
+  <meta property="og:title" content="Natsumiii7 — ¿Aceptas jugar Minecraft?" />
+  <meta property="og:description" content="Dos botones: Sí y un No travieso que nunca se deja presionar." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#2e7d32" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%232e7d32'/%3E%3Ctext x='50' y='65' text-anchor='middle' font-size='70' fill='white'%3E%F0%9F%8C%BF%3C/text%3E%3C/svg%3E" />
@@ -71,7 +71,7 @@
     }
 
     .card{
-      width:min(680px,92vw);
+      width:min(720px,92vw);
       background:var(--panel);
       backdrop-filter: blur(6px);
       border:4px solid #1b5e20;
@@ -91,53 +91,32 @@
 
     .subtitle{
       font-size:clamp(16px,2.6vw,20px);
-      margin:0 auto 1.5rem; max-width:48ch; line-height:1.4;
+      margin:0 auto 1.4rem; max-width:50ch; line-height:1.45;
     }
 
-    /* Formulario */
-    form{
-      display:grid; gap:12px; grid-template-columns:1fr auto; align-items:center;
-      margin:1.2rem auto 0; max-width:520px;
+    .btns{
+      position:relative; margin:1.4rem auto 0; width:min(560px,86vw);
+      height:140px; display:grid; place-items:center;
     }
 
-    label{grid-column:1/-1; font-weight:700}
-
-    input[type="email"]{
-      appearance:none; width:100%;
-      padding:14px 16px; border-radius:14px; border:3px solid var(--stone);
-      font-size:16px; outline:none; transition:.2s ease;
-      background:#fff; box-shadow: 0 3px 0 #263238;
-    }
-    input[type="email"]:focus{
-      border-color:var(--accent); box-shadow: 0 3px 0 #00695c, 0 0 0 4px #00bfa633;
-    }
+    .row{ display:flex; gap:12px; align-items:center; justify-content:center; }
 
     button{
       font-family:"Press Start 2P", monospace; font-size:14px;
       padding:14px 18px; border:0; border-radius:14px; cursor:pointer;
       background:linear-gradient(#00d3bd,#00bfa6); color:#083b34;
-      box-shadow: 0 4px 0 #00695c, 0 12px 24px #00bfa640; transition: transform .06s ease, filter .2s;
+      box-shadow: 0 4px 0 #00695c, 0 12px 24px #00bfa640; transition: transform .06s ease, filter .2s, left .15s, top .15s, transform .15s;
       text-transform:uppercase; letter-spacing:.5px;
+      user-select:none;
     }
     button:hover{filter:brightness(1.05)}
     button:active{transform:translateY(2px); box-shadow:0 2px 0 #00695c}
 
-    /* Aviso legal */
-    .legal{font-size:12px; opacity:.7; margin-top:.8rem}
+    #btnNo{
+      position:absolute; left:12px; top:12px; transform:translate(0,0);
+    }
 
-    /* Detalles decorativos: antorchas */
-    .torch{
-      position:absolute; width:12px; height:46px; background:#6d4c41; border:2px solid #3e2723; border-radius:4px;
-      left:-22px; top:10px; transform:rotate(-10deg); box-shadow: 0 0 0 2px #3e2723 inset;
-    }
-    .torch:before{
-      content:""; position:absolute; top:-22px; left:50%; transform:translateX(-50%);
-      width:26px; height:26px; background: radial-gradient(circle at 50% 60%, #ffecb3 0 40%, #ff9800 40% 70%, #ff5722 70% 100%);
-      filter: blur(0.3px); border-radius:50%; box-shadow: 0 0 24px 8px #ff9800cc;
-      animation: flicker 1.4s infinite steps(2);
-    }
-    .torch.right{left:auto; right:-22px; top:24px; transform:rotate(8deg)}
-    @keyframes flicker{50%{transform:translateX(-50%) scale(1.05)} 100%{transform:translateX(-50%) scale(0.98)}}
+    #msg{ margin-top:1rem; font-weight:700; }
 
     footer{
       position:fixed; bottom:10px; left:0; right:0; text-align:center; font-size:12px; color:#0009;
@@ -153,13 +132,16 @@
       <div class="torch right" aria-hidden="true"></div>
 
       <h1 id="t" class="title">Natsumiii7</h1>
-      <p id="d" class="subtitle">¡Te invito a <strong>jugar Minecraft</strong> conmigo Natsumi! Déjame tu correo y te lo compro  🧱⛏️</p>
+      <p id="d" class="subtitle">Aceptas jugar Minecraft conmigo, <strong>Natsumi</strong>? ⛏️🧱</p>
 
-      <form id="inviteForm" novalidate>
-        <label for="email">Tu correo</label>
-        <input id="email" name="email" type="email" inputmode="email" placeholder="natsumi@example.com" autocomplete="email" required aria-required="true" />
-        <button type="submit" aria-label="Enviar invitación">Listo</button>
-      </form>
+      <div class="btns" id="btnZone">
+        <div class="row">
+          <button id="btnSi" type="button" aria-label="Aceptar">Sí</button>
+        </div>
+        <button id="btnNo" type="button" aria-label="No">No</button>
+      </div>
+
+      <p id="msg" aria-live="polite"></p>
     </section>
   </main>
   <div class="ground" aria-hidden="true"></div>
@@ -169,34 +151,40 @@
   </footer>
 
   <script>
-    // Manejo del "envío" sin backend: abre un mailto prellenado
-    const f = document.getElementById('inviteForm');
-    const input = document.getElementById('email');
+    const btnSi = document.getElementById('btnSi');
+    const btnNo = document.getElementById('btnNo');
+    const zone = document.getElementById('btnZone');
+    const msg = document.getElementById('msg');
 
-    f.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = input.value.trim();
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        input.focus();
-        input.setCustomValidity('Ingresa un correo válido Natsumi ._.    .');
-        input.reportValidity();
-        return;
-      }
-      input.setCustomValidity('');
+    function moveNo() {
+      const r = zone.getBoundingClientRect();
+      const b = btnNo.getBoundingClientRect();
+      const maxX = Math.max(0, r.width - b.width - 8);
+      const maxY = Math.max(0, r.height - b.height - 8);
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      btnNo.style.transform = `translate(${x}px, ${y}px)`;
+    }
 
-      const subject = encodeURIComponent('Juega conmigo Natsumi jaja');
-      const body = encodeURIComponent(
-        `Hola Marcos!\n\nMi correo es: ${email}\nSi quier jugar Minecraft.\n\n T.T \n\n— Enviado desde Natsumiii7`
-      );
-
-      // Abre el cliente de correo del usuario para enviar el mensaje
-      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-
-      // Feedback visual
-      const btn = f.querySelector('button');
-      btn.disabled = true; btn.textContent = '¡Abriendo tu correo…!';
-      setTimeout(()=>{btn.disabled=false; btn.textContent='¡Listo!';}, 3000);
+    // Evitar que den clic en "No" (desktop y mobile)
+    ['pointerenter','pointerover','pointerdown','touchstart','focus'].forEach(evt => {
+      btnNo.addEventListener(evt, (e)=>{
+        e.preventDefault();
+        moveNo();
+      }, { passive: false });
     });
+
+    // Por si alguien logra presionar Enter con foco en No (accesibilidad)
+    btnNo.addEventListener('click', (e)=>{ e.preventDefault(); moveNo(); });
+
+    // Al decir Sí
+    btnSi.addEventListener('click', ()=>{
+      btnNo.style.display = 'none';
+      msg.textContent = '¡Entonces envíame una screenshot de esta página para ver, jaja!';
+    });
+
+    // Primera reubicación para que ya empiece travieso
+    moveNo();
   </script>
 </body>
 </html>
