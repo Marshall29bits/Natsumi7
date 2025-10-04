@@ -36,79 +36,42 @@
     }
 
     /* Cielo con nubes pixeladas */
-    .clouds{
-      position:fixed; inset:0; pointer-events:none; opacity:.55;
+    .clouds{ position:fixed; inset:0; pointer-events:none; opacity:.55;
       background:
         radial-gradient(#fff 40%,#fff0 41%) 0 0/120px 120px,
         radial-gradient(#fff 40%,#fff0 41%) 60px 30px/140px 140px,
         radial-gradient(#fff 40%,#fff0 41%) 20px 80px/180px 180px;
-      mix-blend-mode:screen;
-      animation: drift 60s linear infinite;
-      image-rendering: pixelated;
-    }
+      mix-blend-mode:screen; animation: drift 60s linear infinite; image-rendering: pixelated; }
     @keyframes drift{to{background-position:1000px 0, 1400px 0, 1800px 0}}
 
     /* Plataforma estilo bloque */
-    .ground{
-      position:fixed; left:0; right:0; bottom:0; height:35vh; min-height:220px;
-      background:
-        linear-gradient(0deg, var(--dirt) 0 75%, var(--grass) 75% 100%);
-      box-shadow: 0 -4px 0 #3a9e40 inset, 0 -20px 40px #0003 inset;
-    }
-    /* patrón de tierra pixel */
-    .ground:before{
-      content:""; position:absolute; inset:0;
+    .ground{ position:fixed; left:0; right:0; bottom:0; height:35vh; min-height:220px;
+      background: linear-gradient(0deg, var(--dirt) 0 75%, var(--grass) 75% 100%);
+      box-shadow: 0 -4px 0 #3a9e40 inset, 0 -20px 40px #0003 inset; }
+    .ground:before{ content:""; position:absolute; inset:0;
       background:
         radial-gradient(#0002 16%,#0000 17%) 0 0/24px 24px,
         radial-gradient(#0003 14%,#0000 15%) 12px 12px/24px 24px;
-      mix-blend-mode:multiply; opacity:.55; image-rendering:pixelated;
-    }
+      mix-blend-mode:multiply; opacity:.55; image-rendering:pixelated; }
 
     /* Contenedor principal */
-    .wrap{
-      position:relative; z-index:2; min-height:100dvh;
-      display:grid; place-items:center; padding:4rem 1rem 40vh;
-    }
+    .wrap{ position:relative; z-index:2; min-height:100dvh; display:grid; place-items:center; padding:4rem 1rem 40vh; }
 
-    .card{
-      width:min(720px,92vw);
-      background:var(--panel);
-      backdrop-filter: blur(6px);
-      border:4px solid #1b5e20;
-      border-radius:22px;
-      box-shadow: 0 20px 60px #0002, 0 6px 0 #1b5e20;
-      padding:2.2rem;
-      text-align:center;
-    }
+    .card{ width:min(720px,92vw); background:var(--panel); backdrop-filter: blur(6px);
+      border:4px solid #1b5e20; border-radius:22px; box-shadow: 0 20px 60px #0002, 0 6px 0 #1b5e20; padding:2.2rem; text-align:center; }
 
-    .title{
-      font-family:"Press Start 2P", monospace;
-      font-size:clamp(22px,4.2vw,36px);
-      color:#1b5e20; letter-spacing:1px;
-      text-shadow: 0 4px 0 #9ccc65, 0 8px 0 #689f38, 0 12px 0 #33691e, 2px 2px 6px #0004;
-      margin:0 0 1.2rem;
-    }
+    .title{ font-family:"Press Start 2P", monospace; font-size:clamp(22px,4.2vw,36px);
+      color:#1b5e20; letter-spacing:1px; text-shadow: 0 4px 0 #9ccc65, 0 8px 0 #689f38, 0 12px 0 #33691e, 2px 2px 6px #0004; margin:0 0 1.2rem; }
 
-    .subtitle{
-      font-size:clamp(16px,2.6vw,20px);
-      margin:0 auto 1.4rem; max-width:50ch; line-height:1.45;
-    }
+    .subtitle{ font-size:clamp(16px,2.6vw,20px); margin:0 auto 1.4rem; max-width:50ch; line-height:1.45; }
 
-    .btns{
-      position:relative; margin:1.4rem auto 0; width:min(560px,86vw);
-      height:clamp(180px, 34vh, 320px); display:grid; place-items:center;
-      touch-action: none; /* mejora respuesta en táctiles */
-    }
+    .btns{ position:relative; margin:1.4rem auto 0; width:min(560px,86vw); height:clamp(180px, 34vh, 320px); display:grid; place-items:center; touch-action: none; }
 
     .row{ display:flex; gap:12px; align-items:center; justify-content:center; }
 
-    button{
-      font-family:"Press Start 2P", monospace; font-size:14px;
-      padding:14px 18px; border:0; border-radius:14px; cursor:pointer;
-      background:linear-gradient(#00d3bd,#00bfa6); color:#083b34;
-      box-shadow: 0 4px 0 #00695c, 0 12px 24px #00bfa640; transition: transform .06s ease, filter .2s, left .15s, top .15s, transform .15s;
-      text-transform:uppercase; letter-spacing:.5px; user-select:none; touch-action: manipulation;
-    }
+    button{ font-family:"Press Start 2P", monospace; font-size:14px; padding:14px 18px; border:0; border-radius:14px; cursor:pointer;
+      background:linear-gradient(#00d3bd,#00bfa6); color:#083b34; box-shadow: 0 4px 0 #00695c, 0 12px 24px #00bfa640;
+      transition: transform .06s ease, filter .2s, left .15s, top .15s, transform .15s; text-transform:uppercase; letter-spacing:.5px; user-select:none; touch-action: manipulation; }
     button:hover{filter:brightness(1.05)}
     button:active{transform:translateY(2px); box-shadow:0 2px 0 #00695c}
 
@@ -117,9 +80,14 @@
 
     #msg{ margin-top:1rem; font-weight:700; }
 
-    footer{
-      position:fixed; bottom:10px; left:0; right:0; text-align:center; font-size:12px; color:#0009;
-    }
+    /* Celebración */
+    #celebration{ display:none; margin-top:1rem; }
+    #celebration.show{ display:block; animation: pop .6s ease; }
+    @keyframes pop{ from{ opacity:0; transform:scale(.92) } to{ opacity:1; transform:scale(1) } }
+    .caption{ font-family:"Press Start 2P", monospace; margin-top:.5rem; }
+    .pony{ width:min(260px, 60vw); height:auto; }
+
+    footer{ position:fixed; bottom:10px; left:0; right:0; text-align:center; font-size:12px; color:#0009; }
     a{color:#1565c0; text-decoration:underline dotted}
   </style>
 </head>
@@ -141,12 +109,50 @@
       </div>
 
       <p id="msg" aria-live="polite"></p>
+
+      <!-- Celebración con pony (SVG original, no depende de imágenes externas) -->
+      <div id="celebration" aria-hidden="true">
+        <svg class="pony" viewBox="0 0 180 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pony arcoíris">
+          <defs>
+            <linearGradient id="mane" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ff6ec7"/>
+              <stop offset="33%" stop-color="#ffd166"/>
+              <stop offset="66%" stop-color="#6ee7ff"/>
+              <stop offset="100%" stop-color="#b388ff"/>
+            </linearGradient>
+            <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fff"/>
+              <stop offset="100%" stop-color="#f3f7ff"/>
+            </linearGradient>
+          </defs>
+          <!-- cuerpo -->
+          <ellipse cx="90" cy="75" rx="54" ry="34" fill="url(#body)" stroke="#9fb3c8"/>
+          <!-- cabeza -->
+          <circle cx="140" cy="60" r="22" fill="url(#body)" stroke="#9fb3c8"/>
+          <!-- ojo -->
+          <circle cx="148" cy="58" r="4" fill="#263238"/>
+          <circle cx="149.5" cy="57" r="1.5" fill="#fff"/>
+          <!-- patas -->
+          <rect x="60" y="104" width="10" height="20" rx="3" fill="#d7e3f4" stroke="#9fb3c8"/>
+          <rect x="110" y="104" width="10" height="20" rx="3" fill="#d7e3f4" stroke="#9fb3c8"/>
+          <!-- melena y cola arcoíris -->
+          <path d="M130 48 C116 40, 108 36, 92 44 C78 50, 74 64, 86 72" fill="none" stroke="url(#mane)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M46 76 C34 90, 40 106, 64 110" fill="none" stroke="url(#mane)" stroke-width="10" stroke-linecap="round"/>
+          <!-- estrellitas -->
+          <g fill="#ffd166" opacity=".9">
+            <polygon points="20,20 23,28 31,28 25,33 27,41 20,36 13,41 15,33 9,28 17,28"/>
+            <polygon points="170,20 173,26 179,26 175,30 176,36 170,33 164,36 165,30 161,26 167,26"/>
+          </g>
+        </svg>
+        <div class="caption">jajaja tu</div>
+      </div>
+
     </section>
   </main>
   <div class="ground" aria-hidden="true"></div>
 
   <footer>
-    Hecho con ❤❤❤❤❤❤❤ para Natsumi • <a href="https://github.com/" target="_blank" rel="noopener"></a>
+    Hecho con ❤❤❤❤❤❤❤❤❤❤❤ para Natsumi • <a href="https://github.com/" target="_blank" rel="noopener"></a>
   </footer>
 
   <script>
@@ -154,6 +160,7 @@
     const btnNo = document.getElementById('btnNo');
     const zone = document.getElementById('btnZone');
     const msg = document.getElementById('msg');
+    const celebration = document.getElementById('celebration');
 
     function rand(min, max){ return Math.random() * (max - min) + min; }
 
@@ -173,14 +180,14 @@
       return { x: e.clientX, y: e.clientY };
     }
 
-    // Si el puntero (o dedo) se acerca al botón No, ¡huye!
+    // Proximidad: si el dedo/mano se acerca al botón No, ¡huye!
     function handleProximity(e){
       const p = getPoint(e);
       const b = btnNo.getBoundingClientRect();
       const cx = b.left + b.width/2;
       const cy = b.top + b.height/2;
       const dist = Math.hypot(cx - p.x, cy - p.y);
-      const threshold = Math.max(90, Math.max(b.width, b.height) * 1.8); // mayor umbral para táctiles
+      const threshold = Math.max(90, Math.max(b.width, b.height) * 1.8); // mayor umbral táctil
       if (dist < threshold) {
         moveNo();
         if (e.cancelable) e.preventDefault();
@@ -193,14 +200,15 @@
     });
     btnNo.addEventListener('click', (e)=>{ if (e.cancelable) e.preventDefault(); moveNo(); });
 
-    // Moverse cuando el dedo/mano se acerca
+    // Moverse al acercarse
     zone.addEventListener('pointermove', handleProximity, { passive: false });
     zone.addEventListener('touchmove', handleProximity, { passive: false });
 
-    // Al decir Sí
+    // Al decir Sí: ocultar No, mostrar mensaje y pony
     btnSi.addEventListener('click', ()=>{
       btnNo.style.display = 'none';
-      msg.textContent = '¡Entonces envíame una screenshot de esta página para ver, jaja!';
+      msg.innerHTML = '¡Entonces envíame una screenshot de esta página para ver, jaja!<br><strong>jajaja tu</strong>';
+      celebration.classList.add('show');
     });
 
     // Recalcular en resize y primera reubicación
